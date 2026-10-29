@@ -1,0 +1,12 @@
+{
+  "name": "tech-care-dashboard",
+  "version": "1.0.0",
+  "description": "Tech.Care Patient Medical Dashboard with Blood Pressure Analytics",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["dashboard", "healthcare", "chartjs"],
+  "author": "",
+  "license": "ISC"
+}

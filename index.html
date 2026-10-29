@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech.Care - Patient Dashboard</title>
+  
+  <!-- Typography: Google Fonts Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js & Application Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#01F0D0"/>
+          <path d="M12 7V17M7 12H17" stroke="#072635" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1 class="logo-title">Tech<span>.Care</span></h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-links">
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Overview</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Patients</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Schedule</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>Message</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        <span>Transactions</span>
+      </a>
+    </nav>
+
+    <!-- Doctor Profile Header -->
+    <div class="user-profile-header">
+      <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=100&auto=format&fit=crop&q=80" alt="Dr. Jose Simmons" class="doctor-avatar">
+      <div class="doctor-info">
+        <p class="doctor-name">Dr. Jose Simmons</p>
+        <p class="doctor-role">General Practitioner</p>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" title="Settings" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+        <button class="icon-btn" title="More options" aria-label="More options">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Patient Dashboard Layout -->
+  <main class="dashboard">
+
+    <!-- Left Column: Patients List -->
+    <aside class="sidebar card">
+      <div class="sidebar-header">
+        <h2 class="section-heading">Patients</h2>
+        <button class="search-toggle-btn" id="search-toggle" title="Search patients" aria-label="Search patients">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </div>
+      <div class="search-box-container" id="search-container">
+        <input type="text" id="patient-search" placeholder="Search patients..." aria-label="Search patients">
+      </div>
+      <div id="patient-list" class="patient-list-container">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading patients...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Column: Diagnosis History, Charts, Vitals, and Diagnostic List -->
+    <section class="content-area">
+
+      <!-- Diagnosis History Card -->
+      <div class="card diagnosis-section">
+        <h2 class="section-heading">Diagnosis History</h2>
+
+        <!-- Blood Pressure Chart & Stats Card -->
+        <div class="blood-pressure-card">
+          <div class="bp-chart-column">
+            <div class="bp-card-header">
+              <h3 class="bp-title">Blood Pressure</h3>
+              <div class="timeframe-select-wrap">
+                <select id="timeframe-select" class="timeframe-select" aria-label="Select history timeframe">
+                  <option value="6" selected>Last 6 months</option>
+                  <option value="12">Last 12 months</option>
+                  <option value="all">All history</option>
+                </select>
+              </div>
+            </div>
+            <div class="chart-canvas-wrapper">
+              <canvas id="bloodPressureChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Systolic & Diastolic Summary Column -->
+          <div class="bp-stats-column">
+            <div class="stat-group">
+              <div class="stat-indicator-header">
+                <span class="dot systolic-dot"></span>
+                <span class="stat-label">Systolic</span>
+              </div>
+              <div class="stat-number" id="systolic-value">--</div>
+              <div class="stat-comparison" id="systolic-level">
+                <span class="stat-arrow">▲</span>
+                <span class="stat-level-text">Loading...</span>
+              </div>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <div class="stat-group">
+              <div class="stat-indicator-header">
+                <span class="dot diastolic-dot"></span>
+                <span class="stat-label">Diastolic</span>
+              </div>
+              <div class="stat-number" id="diastolic-value">--</div>
+              <div class="stat-comparison" id="diastolic-level">
+                <span class="stat-arrow">▼</span>
+                <span class="stat-level-text">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Vital Metrics Cards -->
+        <div class="vital-cards-grid">
+          <!-- Respiratory Rate -->
+          <div class="vital-card vital-respiratory">
+            <div class="vital-icon-circle blue-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0075FF" stroke-width="2">
+                <path d="M12 4v7m0 0l-3 3m3-3l3 3M6 9a4 4 0 0 0-4 4c0 3 2 7 5 7h1c2 0 3-2 4-4V9M18 9a4 4 0 0 1 4 4c0 3-2 7-5 7h-1c-2 0-3-2-4-4V9"/>
+              </svg>
+            </div>
+            <p class="vital-label">Respiratory Rate</p>
+            <h3 class="vital-value" id="respiratory-value">-- bpm</h3>
+            <p class="vital-status" id="respiratory-status">Loading...</p>
+          </div>
+
+          <!-- Temperature -->
+          <div class="vital-card vital-temperature">
+            <div class="vital-icon-circle red-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF5C5C" stroke-width="2">
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+              </svg>
+            </div>
+            <p class="vital-label">Temperature</p>
+            <h3 class="vital-value" id="temperature-value">--°F</h3>
+            <p class="vital-status" id="temperature-status">Loading...</p>
+          </div>
+
+          <!-- Heart Rate -->
+          <div class="vital-card vital-heart-rate">
+            <div class="vital-icon-circle pink-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E66FD2" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <p class="vital-label">Heart Rate</p>
+            <h3 class="vital-value" id="heart-rate-value">-- bpm</h3>
+            <p class="vital-status" id="heart-rate-status">
+              <span class="stat-arrow down">▼</span>
+              <span id="heart-rate-status-text">Loading...</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Diagnostic List Card -->
+      <div class="card diagnostic-list-section">
+        <h2 class="section-heading">Diagnostic List</h2>
+        <div class="diagnostic-table-wrapper">
+          <table class="diagnostic-table">
+            <thead>
+              <tr>
+                <th>Problem / Diagnosis</th>
+                <th>Description</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="diagnostics">
+              <tr>
+                <td colspan="3" class="table-loading">Loading diagnostic data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Column: Patient Profile & Lab Results -->
+    <aside class="profile-column">
+
+      <!-- Patient Profile Card -->
+      <div class="card patient-profile-card">
+        <div id="patient-profile">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading profile...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab Results Card -->
+      <div class="card lab-results-card">
+        <h3 class="section-heading">Lab Results</h3>
+        <div id="lab-results" class="lab-results-list">
+          <div class="loading-state">
+            <p>Loading lab results...</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+</body>
+</html>
